@@ -4,6 +4,7 @@ import { useContext, useRef } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { saveUser } from "../../../api/auth";
 
 const Login = () => {
   const { loading, setLoading, signIn, signInWithGoogle, resetPassword } =
@@ -35,6 +36,9 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        //save user to db
+        saveUser(result.user)
+
         navigate(from, { replace: true })
       })
       .catch((err) => {
