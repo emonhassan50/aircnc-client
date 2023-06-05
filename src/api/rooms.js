@@ -20,13 +20,16 @@ export const getAllRooms = async () => {
 };
 
 //get filtered rooms for hosts
-export const getRooms = async (email) => {
+/* export const getRooms = async (email) => {
   const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/rooms/${email}`
-  );
+    `${import.meta.env.VITE_API_URL}/rooms/${email}`, {
+      headers:{
+        authorization: `Bearer ${localStorage.getItem('access-token')}`
+      }
+    });
   const data = await response.json();
   return data;
-};
+}; */
 
 // Get a single rooms
 export const getRoom = async (id) => {
@@ -45,4 +48,19 @@ export const deleteRoom = async id => {
   })
   const result = await response.json()
   return result
+}
+
+// update a room
+export const updateRoom = async (roomData, id) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${id}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('access-token')}`,
+    },
+    body: JSON.stringify(roomData),
+  })
+
+  const data = await response.json()
+  return data
 }

@@ -9,7 +9,6 @@ import { getAllRooms } from "../../api/rooms";
 const Rooms = () => {
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
-  console.log(category);
 
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -41,7 +40,7 @@ const Rooms = () => {
           ))}
         </div>
       ) : (
-        <div className="pt-12">
+        <div className="min-h-[calc(100vh-300px)] flex items-center justify-center">
             <Heading 
             title='No Rooms Available In This Category!'
             subtitle='Please Select Other Categories.'
